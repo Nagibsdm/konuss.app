@@ -1,135 +1,187 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import json
 
-# Configuración de los mercados y productos
-mercados = {
+# Configuración inicial de los mercados y productos
+mercados_iniciales = {
     "Bodegones": {
         "Pizza en Cono": {"precio_venta": 4.70, "costo_variable": 1.60, "escenarios": {"pesimista": 4000, "base": 6000, "optimista": 10000}},
-        "Panzerotti": {"precio_venta": 4.80, "costo_variable": 1.80, "escenarios": {"pesimista": 400, "base": 533, "optimista": 667}},  # Paquete de 6
-        "Pastelitos": {"precio_venta": 0.50, "costo_variable": 0.20, "escenarios": {"pesimista": 33000, "base": 35000, "optimista": 40000}},
+        "Panzerotti": {"precio_venta": 4.80, "costo_variable": 1.80, "escenarios": {"pesimista": 400, "base": 533, "optimista": 667}},
+        "Pastelitos": {"precio_venta": 0.50, "costo_variable": 0.20, "escenarios": {"pesimista": 3300, "base": 3500, "optimista": 4000}},
     },
     "Cantinas": {
         "Pizza en Cono Pequeños": {"precio_venta": 4.00, "costo_variable": 1.40, "escenarios": {"pesimista": 3000, "base": 5000, "optimista": 7000}},
-        "Panzerotti": {"precio_venta": 4.80, "costo_variable": 1.80, "escenarios": {"pesimista": 333, "base": 500, "optimista": 667}},  # Paquete de 6
-        "Pastelitos": {"precio_venta": 0.60, "costo_variable": 0.25, "escenarios": {"pesimista": 31000, "base": 33000, "optimista": 36000}},
-    },
-    "Delivery y Take Away": {
-        "Pizza en Cono": {"precio_venta": 5.00, "costo_variable": 1.80, "escenarios": {"pesimista": 4000, "base": 6000, "optimista": 10000}},
-        "Panzerotti": {"precio_venta": 4.80, "costo_variable": 1.80, "escenarios": {"pesimista": 367, "base": 533, "optimista": 700}},  # Paquete de 6
-        "Pastelitos": {"precio_venta": 0.55, "costo_variable": 0.20, "escenarios": {"pesimista": 33000, "base": 34000, "optimista": 38000}},
+        "Panzerotti": {"precio_venta": 4.80, "costo_variable": 1.80, "escenarios": {"pesimista": 333, "base": 500, "optimista": 667}},
+        "Pastelitos": {"precio_venta": 0.60, "costo_variable": 0.25, "escenarios": {"pesimista": 3100, "base": 3300, "optimista": 3600}},
     },
 }
 
-# Gasto fijo total para toda la producción
-gasto_fijo_total = 2500
+# Utilizar session_state para mantener los cambios entre mercados
+if "mercados" not in st.session_state:
+    st.session_state.mercados = mercados_iniciales
 
-# Función para distribuir el gasto fijo proporcionalmente
-def distribuir_gasto_fijo(productos):
-    for mercado, productos_mercado in productos.items():
-        for producto, datos in productos_mercado.items():
-            total_produccion = sum(datos["escenarios"].values())  # Total de la producción de todos los escenarios
-            for escenario, cantidad in datos["escenarios"].items():
-                datos["gasto_fijo_proporcional"] = (cantidad / total_produccion) * gasto_fijo_total
-    return productos
+# Ajustar gasto fijo total desde un cuadro
+gasto_fijo_total = st.sidebar.number_input("Total Gasto Fijo ($):", value=2500, step=100)
 
-# Distribuir el gasto fijo a todos los productos
-mercados = distribuir_gasto_fijo(mercados)
+# Selección del mercado desde la barra lateral
+mercado_seleccionado = st.sidebar.selectbox("Seleccione un mercado:", list(st.session_state.mercados.keys()) + ["Total"])
 
-# Función para calcular los resultados mensuales
-def calcular_resultados_mensuales(productos):
+# Selección del escenario desde la barra lateral
+escenario_seleccionado = st.sidebar.selectbox("Seleccione un escenario:", ["pesimista", "base", "optimista"])
+
+# Función para distribuir el gasto fijo proporcionalmente entre mercados y productos
+def distribuir_gasto_fijo(mercados, gasto_fijo_total):
+    total_produccion = sum(
+        sum(sum(datos["escenarios"].values()) for datos in mercados[mercado].values())
+        for mercado in mercados.keys()
+    )
+
+    for mercado in mercados.keys():
+        for producto, datos in mercados[mercado].items():
+            total_producto = sum(datos["escenarios"].values())
+            datos["gasto_fijo_proporcional"] = gasto_fijo_total * (total_producto / total_produccion)
+    return mercados
+
+# Distribuir el gasto fijo
+st.session_state.mercados = distribuir_gasto_fijo(st.session_state.mercados, gasto_fijo_total)
+
+# Función para guardar la configuración en un archivo JSON
+def guardar_configuracion(mercados, gasto_fijo_total):
+    with open("configuracion.json", "w") as file:
+        json.dump({"mercados": mercados, "gasto_fijo_total": gasto_fijo_total}, file)
+    st.sidebar.success("Configuración guardada correctamente.")
+
+# Función para cargar la configuración desde un archivo JSON
+def cargar_configuracion():
+    try:
+        with open("configuracion.json", "r") as file:
+            data = json.load(file)
+        st.sidebar.success("Configuración cargada correctamente.")
+        return data["mercados"], data["gasto_fijo_total"]
+    except FileNotFoundError:
+        st.sidebar.error("No se encontró una configuración guardada.")
+        return st.session_state.mercados, gasto_fijo_total
+
+# Botones para guardar y cargar configuración
+if st.sidebar.button("Guardar Configuración"):
+    guardar_configuracion(st.session_state.mercados, gasto_fijo_total)
+
+if st.sidebar.button("Cargar Configuración"):
+    st.session_state.mercados, gasto_fijo_total = cargar_configuracion()
+    st.session_state.mercados = distribuir_gasto_fijo(st.session_state.mercados, gasto_fijo_total)
+
+# Configuración interactiva de productos
+if mercado_seleccionado != "Total":
+    st.sidebar.header(f"Configuración de {mercado_seleccionado}")
+    productos = st.session_state.mercados[mercado_seleccionado]
+    for idx, (producto, datos) in enumerate(productos.items()):
+        with st.sidebar.expander(f"⚙️ {producto}"):
+            # Ajustar el precio de venta
+            datos["precio_venta"] = st.number_input(
+                f"Precio de venta ({producto})", 
+                value=datos["precio_venta"], 
+                step=0.1, 
+                key=f"precio_{producto}_{mercado_seleccionado}_{idx}"
+            )
+            # Ajustar el costo variable
+            datos["costo_variable"] = st.number_input(
+                f"Costo variable ({producto})", 
+                value=datos["costo_variable"], 
+                step=0.1, 
+                key=f"costo_{producto}_{mercado_seleccionado}_{idx}"
+            )
+            # Ajustar las cantidades para cada escenario
+            for escenario in ["pesimista", "base", "optimista"]:
+                datos["escenarios"][escenario] = st.number_input(
+                    f"Cantidad {escenario.capitalize()} ({producto})", 
+                    value=datos["escenarios"][escenario], 
+                    step=100, 
+                    min_value=0, 
+                    max_value=15000, 
+                    key=f"{escenario}_{producto}_{mercado_seleccionado}_{idx}"
+                )
+
+# Función para calcular resultados financieros
+def calcular_resultados_financieros(mercado, productos, escenario):
     resultados = []
     for producto, datos in productos.items():
-        for escenario, cantidad in datos["escenarios"].items():
-            ingreso = cantidad * datos["precio_venta"]
-            costo_variable_total = cantidad * datos["costo_variable"]
-            margen_contribucion = ingreso - costo_variable_total
-            utilidad_operativa = margen_contribucion - datos["gasto_fijo_proporcional"]
-            rentabilidad = (utilidad_operativa / ingreso * 100) if ingreso > 0 else 0
-            ganancia_neta = ingreso - costo_variable_total - datos["gasto_fijo_proporcional"]
+        cantidad = datos["escenarios"][escenario]
+        ingreso = cantidad * datos["precio_venta"]
+        costo_variable_total = cantidad * datos["costo_variable"]
+        gasto_fijo = datos.get("gasto_fijo_proporcional", 0)
+        ganancia_neta = ingreso - costo_variable_total - gasto_fijo
+        resultados.append({
+            "Mercado": mercado,
+            "Producto": producto,
+            "Cantidad Vendida": cantidad,
+            "Ingresos ($)": ingreso,
+            "Costos Variables ($)": costo_variable_total,
+            "Gasto Fijo Proporcional ($)": gasto_fijo,
+            "Ganancia Neta ($)": ganancia_neta,
+        })
+    return resultados
 
-            resultados.append({
-                "Producto": producto,
-                "Escenario": escenario.capitalize(),
-                "Ingresos Mensuales ($)": ingreso,
-                "Costos Variables Mensuales ($)": costo_variable_total,
-                "Margen de Contribución ($)": margen_contribucion,
-                "Utilidad Operativa Mensual ($)": utilidad_operativa,
-                "Rentabilidad (%)": rentabilidad,
-                "Ganancia Neta Mensual ($)": ganancia_neta
-            })
-    return pd.DataFrame(resultados)
+# Consolidar resultados para "Total"
+def consolidar_resultados(mercados, escenario):
+    resultados_totales = {}
+    for mercado, productos in mercados.items():
+        for resultado in calcular_resultados_financieros(mercado, productos, escenario):
+            producto = resultado["Producto"]
+            if producto not in resultados_totales:
+                resultados_totales[producto] = resultado
+            else:
+                # Sumar los valores para consolidar productos del mismo tipo
+                resultados_totales[producto]["Cantidad Vendida"] += resultado["Cantidad Vendida"]
+                resultados_totales[producto]["Ingresos ($)"] += resultado["Ingresos ($)"]
+                resultados_totales[producto]["Costos Variables ($)"] += resultado["Costos Variables ($)"]
+                resultados_totales[producto]["Gasto Fijo Proporcional ($)"] += resultado["Gasto Fijo Proporcional ($)"]
+                resultados_totales[producto]["Ganancia Neta ($)"] += resultado["Ganancia Neta ($)"]
+    return list(resultados_totales.values())
 
-# Función para mostrar gráfico de barras
-def mostrar_grafico_configuracion_barras(productos, escenario):
-    fig, ax = plt.subplots(figsize=(12, 6))
+# Calcular resultados financieros para el mercado seleccionado
+if mercado_seleccionado == "Total":
+    resultados = consolidar_resultados(st.session_state.mercados, escenario_seleccionado)
+else:
+    productos = st.session_state.mercados[mercado_seleccionado]
+    resultados = calcular_resultados_financieros(mercado_seleccionado, productos, escenario_seleccionado)
 
-    nombres = []
-    ingresos = []
-    costos_variables = []
-    gastos_fijos = []
-    ganancias_netas = []
+# Mostrar resultados financieros
+st.header(f"Resultados Financieros - {mercado_seleccionado} ({escenario_seleccionado.capitalize()})")
+resultados_df = pd.DataFrame(resultados)
 
-    # Calcular datos para cada producto en función del escenario seleccionado
-    for producto, datos in productos.items():
-        nombres.append(producto)
-        ingreso = datos["escenarios"][escenario] * datos["precio_venta"]
-        costo_variable = datos["escenarios"][escenario] * datos["costo_variable"]
-        gasto_fijo = datos["gasto_fijo_proporcional"]
-        ganancia_neta = ingreso - costo_variable - gasto_fijo
+# Agregar fila de totales al final de la tabla
+totales = resultados_df.sum(numeric_only=True).to_dict()
+totales["Producto"] = "TOTAL"
+totales["Mercado"] = ""
+resultados_df = pd.concat([resultados_df, pd.DataFrame([totales])], ignore_index=True)
 
-        ingresos.append(ingreso)
-        costos_variables.append(costo_variable)
-        gastos_fijos.append(gasto_fijo)
-        ganancias_netas.append(ganancia_neta)
-
-    # Crear barras
-    ax.bar(nombres, ingresos, label="Ingresos ($)", color="#4CAF50")
-    ax.bar(nombres, costos_variables, label="Costos Variables ($)", color="#FF5733")
-    ax.bar(nombres, gastos_fijos, bottom=costos_variables, label="Gastos Fijos ($)", color="#3498DB")
-
-    # Mostrar ganancias netas como texto en el gráfico
-    for i, ganancia in enumerate(ganancias_netas):
-        ax.text(i, ingresos[i] + 200, f"Ganancia: ${ganancia:,.2f}", ha="center", fontsize=10, color="black", bbox=dict(facecolor='white', alpha=0.7))
-
-    # Configuración del gráfico
-    ax.set_title(f"Ventas, Costos y Ganancias Netas por Producto ({escenario.capitalize()})", fontsize=16, fontweight="bold")
-    ax.set_ylabel("Monto ($)")
-    ax.set_xlabel("Productos")
-    ax.legend()
-    ax.grid(axis="y", linestyle="--", alpha=0.7)
-
-    st.pyplot(fig)
-
-# Función para actualizar automáticamente los valores de los productos
-mercado_seleccionado = st.sidebar.selectbox("Seleccione el Mercado", list(mercados.keys()))
-
-for mercado, productos_mercado in mercados.items():
-    if mercado == mercado_seleccionado:
-        for producto, datos in productos_mercado.items():
-            with st.sidebar.expander(f"⚙️ Configuración de {producto} ({mercado})"):
-                datos["precio_venta"] = st.number_input(f"Precio de venta ({producto})", value=datos["precio_venta"], key=f"precio_venta_{mercado}_{producto}")
-                datos["costo_variable"] = st.number_input(f"Costo variable ({producto})", value=datos["costo_variable"], key=f"costo_variable_{mercado}_{producto}")
-                datos["escenarios"]["pesimista"] = st.slider(f"Escenario Pesimista ({producto})", 0, 50000, datos["escenarios"]["pesimista"], step=500, key=f"pesimista_{mercado}_{producto}")
-                datos["escenarios"]["base"] = st.slider(f"Escenario Base ({producto})", 0, 50000, datos["escenarios"]["base"], step=500, key=f"base_{mercado}_{producto}")
-                datos["escenarios"]["optimista"] = st.slider(f"Escenario Optimista ({producto})", 0, 50000, datos["escenarios"]["optimista"], step=500, key=f"optimista_{mercado}_{producto}")
-
-# Selección de escenario para el gráfico
-st.header("Visualización de Ventas y Costos")
-escenario_grafico = st.selectbox("Selecciona un escenario para visualizar:", ["pesimista", "base", "optimista"])
-
-productos = mercados[mercado_seleccionado]  # Filtrar productos según el mercado seleccionado
-mostrar_grafico_configuracion_barras(productos, escenario_grafico)
-
-# Calcular y mostrar resultados financieros
-st.header("Resultados Financieros")
-escenario_filtrado = st.selectbox("Filtrar resultados por escenario:", ["Pesimista", "Base", "Optimista"])
-resultados_df = calcular_resultados_mensuales(productos)
-resultados_df = resultados_df[resultados_df["Escenario"] == escenario_filtrado]
 st.dataframe(resultados_df)
 
-# Resumen consolidado
-st.subheader("Resumen Consolidado")
-totales = resultados_df.groupby("Escenario").sum()
-totales = totales[["Ingresos Mensuales ($)", "Costos Variables Mensuales ($)", "Ganancia Neta Mensual ($)"]]
-st.dataframe(totales)
+# Opciones para el gráfico
+metricas_grafico = st.multiselect(
+    "Seleccione las métricas para el gráfico:",
+    ["Ingresos ($)", "Costos Variables ($)", "Gasto Fijo Proporcional ($)", "Ganancia Neta ($)"],
+    default=["Ingresos ($)", "Costos Variables ($)", "Gasto Fijo Proporcional ($)"]
+)
+
+# Función para mostrar gráfico de barras
+def mostrar_grafico_barras(resultados, metricas):
+    fig, ax = plt.subplots(figsize=(10, 6))
+    productos = [resultado["Producto"] for resultado in resultados]
+    colores = {"Ingresos ($)": "#4CAF50", "Costos Variables ($)": "#FF5733", "Gasto Fijo Proporcional ($)": "#3498DB", "Ganancia Neta ($)": "#FFC300"}
+    valores = {metrica: [resultado[metrica] for resultado in resultados] for metrica in metricas}
+
+    bottom = [0] * len(productos)
+    for metrica in metricas:
+        ax.bar(productos, valores[metrica], bottom=bottom, label=metrica, color=colores[metrica])
+        bottom = [b + v for b, v in zip(bottom, valores[metrica])]
+
+    ax.set_title("Ingresos, Costos y Ganancia Neta por Producto")
+    ax.set_ylabel("Monto ($)")
+    ax.legend()
+    st.pyplot(fig)
+
+# Mostrar gráfico
+st.subheader("Gráfico de Ingresos, Costos y Ganancia Neta")
+mostrar_grafico_barras(resultados, metricas_grafico)
