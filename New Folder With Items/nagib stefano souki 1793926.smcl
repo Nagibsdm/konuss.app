@@ -1,0 +1,39 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/nagibsouki/Desktop/nagib stefano souki 1793926.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}11 Nov 2021, 11:03:21
+
+{com}. do "/Users/nagibsouki/Downloads/hprice.xls"
+{txt}
+{com}. –œ‡°±·>˛        †˛˛ûü   T8Õ…¿·∞¡‚\pMicrosoft Office User                                                                                        B∞a¿=úØº=X¸\+®8X@ç"∑⁄1»êArial1»êArial1»êArial1»êArial1»êArial1*h6ê
+{bf}{err}–œ‡°±·{sf} is not a valid command name
+{txt}{search r(199), local:r(199);}
+
+end of do-file
+
+{search r(199), local:r(199);}
+
+{com}. do "/Users/nagibsouki/Downloads/hprice.xls"
+{txt}
+{com}. –œ‡°±·>˛        †˛˛ûü   T8Õ…¿·∞¡‚\pMicrosoft Office User                                                                                        B∞a¿=úØº=X¸\+®8X@ç"∑⁄1»êArial1»êArial1»êArial1»êArial1»êArial1*h6ê
+{bf}{err}–œ‡°±·{sf} is not a valid command name
+{txt}{search r(199), local:r(199);}
+
+end of do-file
+
+{search r(199), local:r(199);}
+
+{com}. import hprice.xls
+{err}import: unknown subcommand "hprice.xls"
+{txt}{search r(198), local:r(198);}
+
+{com}. log off
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/nagibsouki/Desktop/nagib stefano souki 1793926.smcl
+  {txt}log type:  {res}smcl
+ {txt}paused on:  {res}11 Nov 2021, 11:11:10
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

@@ -1,0 +1,21 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/nagibsouki/Desktop/nagib souki 1793926.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}11 Nov 2021, 11:16:38
+
+{com}. 
+. import excel "/Users/nagibsouki/Downloads/hprice.xls", sheet("HPRICE")
+{res}{text}(12 vars, 547 obs)
+
+{com}. drop A-L
+
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/nagibsouki/Desktop/nagib souki 1793926.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}11 Nov 2021, 11:17:42
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

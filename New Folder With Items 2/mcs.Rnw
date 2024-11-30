@@ -1,0 +1,47 @@
+\documentclass{article}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{rl}
+  \hline
+ & x \\ 
+  \hline
+sGARCH N & -3.786 \\ 
+  gjrGARCH N & -3.821 \\ 
+  eGARCH N & -3.827 \\ 
+  csGARCH N & -3.792 \\ 
+  sGARCH Std & -3.788 \\ 
+  gjrGARCH Std & -3.823 \\ 
+  eGARCH Std & -3.828 \\ 
+  csGARCH Std & -3.794 \\ 
+  GM N - U & -3.787 \\ 
+  GM-skew N - U & -3.825 \\ 
+  GM Std - U & -3.79 \\ 
+  GM-skew Std - U & -3.827 \\ 
+  DAGM N - U & -3.79 \\ 
+  DAGM-skew  N- U & -3.829 \\ 
+  GM N - Real GDP & -3.788 \\ 
+  GM-skew N - Real GDP & -3.825 \\ 
+  GM Std - Real GDP & -3.79 \\ 
+  GM-skew Std - Real GDP & -3.823 \\ 
+  DAGM N - Real GDP & -3.788 \\ 
+  DAGM N-skew - Real GDP & -3.823 \\ 
+  GM N - Bond Yields & -3.787 \\ 
+  GM-skew N - Bond Yields & -3.822 \\ 
+  GM Std - Bond Yields & -3.071 \\ 
+  DAGM N - Bond Yields & -3.788 \\ 
+  DAGM-skew N - Bond Yields & -3.823 \\ 
+  HS (w=250) & -3.608 \\ 
+  SAV & -3.795 \\ 
+  AS & cellcolor\{gray!75\}-3.839 \\ 
+  IG & -3.798 \\ 
+  Lin. ARCH & -3.782 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+
+\end{document}

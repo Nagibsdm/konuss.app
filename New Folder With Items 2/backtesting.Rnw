@@ -1,0 +1,48 @@
+\documentclass{article}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\begin{table}[ht]
+\centering
+backtesting ES\\
+\begin{tabular}{rrrr}
+  \hline
+ & Expected Exc. & Actual Exc. & P-value \\ 
+  \hline
+sGARCH N & 264.000 & 302.000 & 0.000 \\ 
+  gjrGARCH N & 264.000 & 298.000 & 0.000 \\ 
+  eGARCH N & 264.000 & 293.000 & 0.000 \\ 
+  csGARCH N & 264.000 & 297.000 & 0.000 \\ 
+  sGARCH Std & 264.000 & 315.000 & 0.126 \\ 
+  gjrGARCH Std & 264.000 & 315.000 & 0.320 \\ 
+  eGARCH Std & 264.000 & 310.000 & 0.221 \\ 
+  csGARCH Std & 264.000 & 314.000 & 0.151 \\ 
+  GM N - U & 264.000 & 299.000 & 0.000 \\ 
+  GM-skew N - U & 264.000 & 290.000 & 0.000 \\ 
+  GM Std - U & 264.000 & 313.000 & 0.207 \\ 
+  GM-skew Std - U & 264.000 & 311.000 & 0.340 \\ 
+  DAGM N - U & 264.000 & 294.000 & 0.000 \\ 
+  DAGM-skew  N- U & 264.000 & 293.000 & 0.001 \\ 
+  GM N - Real GDP & 264.000 & 296.000 & 0.000 \\ 
+  GM-skew N - Real GDP & 264.000 & 298.000 & 0.001 \\ 
+  GM Std - Real GDP & 264.000 & 313.000 & 0.211 \\ 
+  GM-skew Std - Real GDP & 264.000 & 311.000 & 0.298 \\ 
+  DAGM N - Real GDP & 264.000 & 296.000 & 0.000 \\ 
+  DAGM N-skew - Real GDP & 264.000 & 291.000 & 0.000 \\ 
+  GM N - Bond Yields & 264.000 & 296.000 & 0.000 \\ 
+  GM-skew N - Bond Yields & 264.000 & 288.000 & 0.000 \\ 
+  GM Std - Bond Yields & 264.000 & 353.000 & 0.013 \\ 
+  DAGM N - Bond Yields & 264.000 & 304.000 & 0.000 \\ 
+  DAGM-skew N - Bond Yields & 264.000 & 290.000 & 0.000 \\ 
+  HS (w=250) & 264.000 & 295.000 & 0.045 \\ 
+  SAV & 264.000 & 266.000 & 0.641 \\ 
+  AS & 264.000 & 266.000 & 0.788 \\ 
+  IG & 264.000 & 265.000 & 0.718 \\ 
+  Lin. ARCH & 264.000 & 265.000 & 0.587 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+
+\end{document}

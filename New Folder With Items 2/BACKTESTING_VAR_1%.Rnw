@@ -1,0 +1,47 @@
+\documentclass{article}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & AE & UC & CC & DQ \\ 
+  \hline
+sGARCH N & 0.000 & 0.000 & 1.742 & 0.000 \\ 
+  gjrGARCH N & 0.000 & 0.000 & 1.705 & 0.000 \\ 
+  eGARCH N & 0.000 & 0.000 & 1.723 & 0.000 \\ 
+  csGARCH N & 0.000 & 0.000 & 1.705 & 0.000 \\ 
+  sGARCH Std & 0.023 & 0.030 & 1.326 & 0.009 \\ 
+  gjrGARCH Std & 0.006 & 0.008 & 1.402 & 0.033 \\ 
+  eGARCH Std & 0.012 & 0.016 & 1.364 & 0.003 \\ 
+  csGARCH Std & 0.032 & 0.041 & 1.307 & 0.012 \\ 
+  GM N - U & 0.000 & 0.000 & 1.648 & 0.000 \\ 
+  GM-skew N - U & 0.000 & 0.000 & 1.648 & 0.000 \\ 
+  GM Std - U & 0.000 & 0.000 & 1.856 & 0.000 \\ 
+  GM-skew Std - U & 0.006 & 0.022 & 1.402 & 0.063 \\ 
+  DAGM N - U & 0.000 & 0.000 & 1.742 & 0.000 \\ 
+  DAGM-skew  N- U & 0.000 & 0.000 & 1.686 & 0.000 \\ 
+  GM N - Real GDP & 0.000 & 0.000 & 1.648 & 0.000 \\ 
+  GM-skew N - Real GDP & 0.000 & 0.000 & 1.648 & 0.000 \\ 
+  GM Std - Real GDP & 0.023 & 0.030 & 1.326 & 0.009 \\ 
+  GM-skew Std - Real GDP & 0.017 & 0.022 & 1.345 & 0.097 \\ 
+  DAGM N - Real GDP & 0.000 & 0.000 & 1.705 & 0.000 \\ 
+  DAGM N-skew - Real GDP & 0.000 & 0.000 & 1.648 & 0.000 \\ 
+  GM N - Bond Yields & 0.000 & 0.000 & 1.648 & 0.000 \\ 
+  GM-skew N - Bond Yields & 0.000 & 0.000 & 1.686 & 0.000 \\ 
+  GM Std - Bond Yields & 0.000 & 0.000 & 1.705 & 0.000 \\ 
+  DAGM N - Bond Yields & 0.000 & 0.000 & 1.629 & 0.000 \\ 
+  DAGM-skew N - Bond Yields & 0.000 & 0.000 & 1.723 & 0.000 \\ 
+  SAV & 0.802 & 0.000 & 0.966 & 0.000 \\ 
+  AS & 0.869 & 0.570 & 1.023 & 0.952 \\ 
+  IG & 0.869 & 0.570 & 1.023 & 0.937 \\ 
+  Lin. ARCH & 0.869 & 0.299 & 1.023 & 0.201 \\ 
+  HS (w=250) & 0.000 & 0.000 & 1.610 & 0.000 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+
+\end{document}

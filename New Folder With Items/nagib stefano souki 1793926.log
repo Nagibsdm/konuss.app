@@ -1,0 +1,72 @@
+--------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/nagibsouki/Desktop/nagib stefa
+> no souki 1793926.log
+  log type:  text
+ opened on:  18 Dec 2021, 07:58:57
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000
+> gn/T//SD47243.000000"
+
+. summarize
+
+    Variable |        Obs        Mean    Std. dev.
+>        Min        Max
+-------------+------------------------------------
+> ---------------------
+        Year |          0
+     Country |          0
+CO2emissio~c |         51    14.65409    3.002683 
+>   8.582937   18.54058
+      rgdppc |         54    24280.15    7337.379 
+>    13356.1   37492.85
+        pceu |         53    4721.243    802.0572 
+>   3063.554    5882.82
+-------------+------------------------------------
+> ---------------------
+           F |          0
+
+. summarize CO2emissionspc rgdppc pceu
+
+    Variable |        Obs        Mean    Std. dev.
+>        Min        Max
+-------------+------------------------------------
+> ---------------------
+CO2emissio~c |         51    14.65409    3.002683 
+>   8.582937   18.54058
+      rgdppc |         54    24280.15    7337.379 
+>    13356.1   37492.85
+        pceu |         53    4721.243    802.0572 
+>   3063.554    5882.82
+
+. 
+. keep if CO2emissionspc!=. & rgdppc=. & pceu!=. 
+=exp not allowed
+r(101);
+
+end of do-file
+
+r(101);
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000
+> gn/T//SD47243.000000"
+
+. gen time _n
+_n invalid varname
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000
+> gn/T//SD47243.000000"
+
+. gen time_n
+=exp required
+r(100);
+
+end of do-file
+
+r(100);
+

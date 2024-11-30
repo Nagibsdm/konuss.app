@@ -1,0 +1,27 @@
+\documentclass{article}
+
+\usepackage{Sweave}
+\begin{document}
+\input{Superior_test_models-concordance}
+
+\begin{table}[ht] \small
+\centering
+\begin{tabular}{|cccccccc|}
+\hline
+ & Rank\_M  & v\_M & MCS\_M & Rank\_R & v\_R & MCS\_R & Loss \\
+\hline
+\
+confidence level 1\%\\
+AS & 1 & -1.139251 & 1.000 & 1 & -1.139251 & 1.000 & -3.482023\\
+\hline
+confidence level 5\% \\
+GM-skew N - U & 4 & -1.094461 & 1.000 & 6 & 1.942306 & 0.251 & -3.824994 \\
+GM-skew Std - U & 3 & -1.119362 & 1.000 & 4 & 1.5125513 & 0.506 & -3.827276 \\
+DAGM-skew N - U & 2 & -1.121833 & 1.000 & 3 & 1.344395 & 0.612 & -3.828983\\
+GM-skew N - Real GDP & 5 & -1.090533 & 1.000 & 5 & 1.903202 & 0.275 & -3.825410\\
+GM Std - Bond Yields & 6 &  1.125073 & 0.016 & 2 & 1.137233 & 0.759 & -3.070974\\
+AS & 1 & -1.196132 & 1.000 & 1 & -1.137233 & 1.000 & -3.838795\\
+\end{tabular}
+\end{table}
+
+\end{document}

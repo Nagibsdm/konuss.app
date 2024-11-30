@@ -1,0 +1,80 @@
+
+Aprire la guida al link:
+
+https://yiqingxu.org/public/BigSurError.pdf
+
+Partire diretti dallo Step 3 della suddetta guida, Xcode NON serve!
+
+
+
+Step 3. Install a GNU gfortran build (a dmg or pkg file) for your Mac from this Github repo:
+
+https://github.com/fxcoudert/gfortran-for-macOS/releases
+
+
+
+Step 4. Now you need to make sure that your gcc compiler can be found and used by R. In your terminal, try:
+$ gcc --version
+
+N.B. il simbolo $ non va inserito su Terminale
+
+Ora, secondo la guida dovrebbe uscire una scritta: "gcc (GCC) .... PARTICULAR PURPOSE"
+
+Ovviamente non funzionerà, quindi bisogna seguire i passaggi aggiuntivi: you need to add a line in a file called “.profile” -- it’s normally hidden in your home folder.
+
+- Aprire finder --> andare nella home directory: Users/gianlorenzo
+- Usare "CMD + SHIFT + ." Per accedere ai file nascosti
+- Aprire file ".zprofile" ed inserire alla fine la riga seguente (senza cancellare nulla):
+
+export PATH="/usr/local/gfortran/bin:/Library/Frameworks/R.framework/Resources:$PATH"
+
+A questo punto runnare su Terminale:
+$ gcc --version
+
+Dovrebbe funzionare. Ora cercare il file nascosto ".Renviron" nella home directory, se non c'è (probabile) bisogna crearlo scrivendo su terminale: 
+touch .Renviron
+
+Aprire il suddetto file e aggiungere la riga: PATH="/usr/local/gfortran/bin:${PATH}
+
+
+
+Step 5. Nella home directory dovrebbe esserci un folder ".R" nascosto, se non c'è bisogna crearlo con il comando su Terminale:
+$ mkdir ~/.R
+
+Poi bisogna creare al suo interno un file e rinominarlo "Makevars". All'interno del file "Makevars" bisogna inserire le seguenti linee che sono descritte dal passo 5 della guida:
+
+FLIBS=-L/usr/local/gfortran/lib/gcc/x86_64-apple-darwin20/11.2.0 -L/usr/local/gfortran/lib
+
+CC = gcc
+CXX = g++
+CXX98 = g++
+CXX11 = g++
+CXX14 = g++
+CXX17 = g++
+CXX20 = g++
+CXXCPP = g++
+FC = gfortran
+F77 = gfortran
+OBJC = gcc
+OBJCXX = g++
+
+
+ATTENZIONE: per quanto riguarda la prima riga da aggiungere, bisogna andare a controllare nel percorso usr/local/gfortran/lib/gcc se la cartella all'interno di è nominata "x86_64-apple-darwin20" e se al suo interno c'è un ulteriore cartella nominata "11.2.0". Altrimenti bisogna cambiare la prima riga da inserire di conseguenza.
+
+
+Per concludere lo step 5, su Terminale bisogna scrivere (SENZA RUNNARLO) il comando: chflags nohidden
+
+Dopodiché, aggiungere uno spazio e trascinare il file "Makevars dentro Terminale a fianco al comando in questione. Ora, noteremo che di fianco al comando c'è il percorso del file e quindi possiamo runnare il comando. Chiudere e riaprire il Finder, andare nella home directory e controllare se il file "Makevars" è invisibile.
+
+
+- Usare "CMD + SHIFT + ." Per nascondere di nuovo i file nascosti
+
+
+
+ALTRI LINK UTILI:
+
+https://stackoverflow.com/questions/40645044/what-is-r-folder-and-where-to-look-for-it
+
+https://stackoverflow.com/questions/40788645/how-to-create-renviron-file
+
+https://superuser.com/questions/313275/where-to-create-a-profile-on-mac-os-x

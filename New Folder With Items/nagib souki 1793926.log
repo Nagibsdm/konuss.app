@@ -1,0 +1,1130 @@
+---------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/nagibsouki/Desktop/nagib souki 1793926.log
+  log type:  text
+ opened on:  11 Nov 2021, 11:19:06
+
+. 
+. import excel "/Users/nagibsouki/Downloads/hprice.xls", sheet("HPRICE") firstrow
+(12 vars, 546 obs)
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. **nagib stefano souki 1793926** 
+. *he use summarize to obtain the descriptive statistics of the variables*
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. summarize
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+   saleprice |        546     68121.6    26702.67      25000     190000
+     lotsize |        546    5150.266    2168.159       1650      16200
+    nbedroom |        546    2.965201    .7373879          1          6
+       nbath |        546    1.285714    .5021579          1          4
+    nstories |        546    1.807692    .8682025          1          4
+-------------+---------------------------------------------------------
+    driveway |        546    .8589744    .3483672          0          1
+     recroom |        546    .1776557    .3825731          0          1
+    basement |        546    .3498168    .4773493          0          1
+         gas |        546    .0457875    .2092157          0          1
+     aircond |        546    .3168498     .465675          0          1
+-------------+---------------------------------------------------------
+     ngarage |        546    .6923077    .8613066          0          3
+   desireloc |        546    .2344322    .4240319          0          1
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. summ, d
+
+                          saleprice
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%        26500          25000
+ 5%        35000          25000
+10%        40500          25000       Obs                 546
+25%        49000          25245       Sum of wgt.         546
+
+50%        62000                      Mean            68121.6
+                        Largest       Std. dev.      26702.67
+75%        82000         174500
+90%       105000         175000       Variance       7.13e+08
+95%       120000         175000       Skewness       1.206503
+99%       155000         190000       Kurtosis       4.930871
+
+                           lotsize
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%         1950           1650
+ 5%         2550           1700
+10%         3000           1836       Obs                 546
+25%         3600           1905       Sum of wgt.         546
+
+50%         4600                      Mean           5150.266
+                        Largest       Std. dev.      2168.159
+75%         6360          13200
+90%         7980          13200       Variance        4700912
+95%         9000          15600       Skewness       1.319121
+99%        12900          16200       Kurtosis        5.72637
+
+                          nbedroom
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            2              1
+ 5%            2              1
+10%            2              2       Obs                 546
+25%            2              2       Sum of wgt.         546
+
+50%            3                      Mean           2.965201
+                        Largest       Std. dev.      .7373879
+75%            3              5
+90%            4              5       Variance        .543741
+95%            4              6       Skewness       .4945091
+99%            5              6       Kurtosis       3.717276
+
+                            nbath
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            1              1
+ 5%            1              1
+10%            1              1       Obs                 546
+25%            1              1       Sum of wgt.         546
+
+50%            1                      Mean           1.285714
+                        Largest       Std. dev.      .5021579
+75%            2              3
+90%            2              3       Variance       .2521625
+95%            2              3       Skewness       1.587718
+99%            3              4       Kurtosis       5.144182
+
+                          nstories
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            1              1
+ 5%            1              1
+10%            1              1       Obs                 546
+25%            1              1       Sum of wgt.         546
+
+50%            2                      Mean           1.807692
+                        Largest       Std. dev.      .8682025
+75%            2              4
+90%            3              4       Variance       .7537756
+95%            4              4       Skewness       1.071702
+99%            4              4       Kurtosis       3.639259
+
+                          driveway
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            0              0
+10%            0              0       Obs                 546
+25%            1              0       Sum of wgt.         546
+
+50%            1                      Mean           .8589744
+                        Largest       Std. dev.      .3483672
+75%            1              1
+90%            1              1       Variance       .1213597
+95%            1              1       Skewness      -2.062787
+99%            1              1       Kurtosis       5.255088
+
+                          rec room
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            0              0
+10%            0              0       Obs                 546
+25%            0              0       Sum of wgt.         546
+
+50%            0                      Mean           .1776557
+                        Largest       Std. dev.      .3825731
+75%            0              1
+90%            1              1       Variance       .1463622
+95%            1              1       Skewness       1.686684
+99%            1              1       Kurtosis       3.844902
+
+                          basement
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            0              0
+10%            0              0       Obs                 546
+25%            0              0       Sum of wgt.         546
+
+50%            0                      Mean           .3498168
+                        Largest       Std. dev.      .4773493
+75%            1              1
+90%            1              1       Variance       .2278624
+95%            1              1       Skewness        .629815
+99%            1              1       Kurtosis       1.396667
+
+                             gas
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            0              0
+10%            0              0       Obs                 546
+25%            0              0       Sum of wgt.         546
+
+50%            0                      Mean           .0457875
+                        Largest       Std. dev.      .2092157
+75%            0              1
+90%            0              1       Variance       .0437712
+95%            0              1       Skewness       4.346031
+99%            1              1       Kurtosis       19.88798
+
+                           aircond
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            0              0
+10%            0              0       Obs                 546
+25%            0              0       Sum of wgt.         546
+
+50%            0                      Mean           .3168498
+                        Largest       Std. dev.       .465675
+75%            1              1
+90%            1              1       Variance       .2168532
+95%            1              1       Skewness       .7873223
+99%            1              1       Kurtosis       1.619876
+
+                           ngarage
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            0              0
+10%            0              0       Obs                 546
+25%            0              0       Sum of wgt.         546
+
+50%            0                      Mean           .6923077
+                        Largest       Std. dev.      .8613066
+75%            1              3
+90%            2              3       Variance        .741849
+95%            2              3       Skewness       .8424857
+99%            3              3       Kurtosis       2.425611
+
+                          desireloc
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            0              0
+10%            0              0       Obs                 546
+25%            0              0       Sum of wgt.         546
+
+50%            0                      Mean           .2344322
+                        Largest       Std. dev.      .4240319
+75%            0              1
+90%            1              1       Variance       .1798031
+95%            1              1       Skewness       1.253732
+99%            1              1       Kurtosis       2.571845
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. *summ, d in way to have a datailed statistic analysis of the variables * 
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. inspect saleprice lotsize nbedroom nbath nstories driveway recroom basement gas aircond ngarage desireloc 
+
+saleprice:  saleprice                           Number of observations
+---------------------                  ---------------------------------------
+                                             Total      Integers   Nonintegers
+|      #                     Negative            -             -             -
+|  #   #                     Zero                -             -             -
+|  #   #                     Positive          546           546             -
+|  #   #                               -----------   -----------   -----------
+|  #   #                     Total             546           546             -
+|  #   #   #   .   .         Missing             -
++----------------------                -----------
+25000            190000                        546
+(More than 99 unique values)
+
+lotsize:  lotsize                               Number of observations
+-----------------                      ---------------------------------------
+                                             Total      Integers   Nonintegers
+|  #                         Negative            -             -             -
+|  #                         Zero                -             -             -
+|  #   #                     Positive          546           546             -
+|  #   #                               -----------   -----------   -----------
+|  #   #                     Total             546           546             -
+|  #   #   #   .   .         Missing             -
++----------------------                -----------
+1650              16200                        546
+(More than 99 unique values)
+
+nbedroom:  nbedroom                             Number of observations
+-------------------                    ---------------------------------------
+                                             Total      Integers   Nonintegers
+|          #                 Negative            -             -             -
+|          #                 Zero                -             -             -
+|          #                 Positive          546           546             -
+|          #                           -----------   -----------   -----------
+|      #   #                 Total             546           546             -
+|  .   #   #   #   .         Missing             -
++----------------------                -----------
+1                     6                        546
+   (6 unique values)
+
+nbath:  nbath                                   Number of observations
+-------------                          ---------------------------------------
+                                             Total      Integers   Nonintegers
+|  #                         Negative            -             -             -
+|  #                         Zero                -             -             -
+|  #                         Positive          546           546             -
+|  #                                   -----------   -----------   -----------
+|  #                         Total             546           546             -
+|  #   #   .   .             Missing             -
++----------------------                -----------
+1                     4                        546
+   (4 unique values)
+
+nstories:  nstories                             Number of observations
+-------------------                    ---------------------------------------
+                                             Total      Integers   Nonintegers
+|      #                     Negative            -             -             -
+|  #   #                     Zero                -             -             -
+|  #   #                     Positive          546           546             -
+|  #   #                               -----------   -----------   -----------
+|  #   #                     Total             546           546             -
+|  #   #   #   #             Missing             -
++----------------------                -----------
+1                     4                        546
+   (4 unique values)
+
+driveway:  driveway                             Number of observations
+-------------------                    ---------------------------------------
+                                             Total      Integers   Nonintegers
+|      #                     Negative            -             -             -
+|      #                     Zero               77            77             -
+|      #                     Positive          469           469             -
+|      #                               -----------   -----------   -----------
+|      #                     Total             546           546             -
+|  .   #                     Missing             -
++----------------------                -----------
+0                     1                        546
+   (2 unique values)
+
+recroom:  rec room                              Number of observations
+------------------                     ---------------------------------------
+                                             Total      Integers   Nonintegers
+|  #                         Negative            -             -             -
+|  #                         Zero              449           449             -
+|  #                         Positive           97            97             -
+|  #                                   -----------   -----------   -----------
+|  #                         Total             546           546             -
+|  #   #                     Missing             -
++----------------------                -----------
+0                     1                        546
+   (2 unique values)
+
+basement:  basement                             Number of observations
+-------------------                    ---------------------------------------
+                                             Total      Integers   Nonintegers
+|  #                         Negative            -             -             -
+|  #                         Zero              355           355             -
+|  #                         Positive          191           191             -
+|  #   #                               -----------   -----------   -----------
+|  #   #                     Total             546           546             -
+|  #   #                     Missing             -
++----------------------                -----------
+0                     1                        546
+   (2 unique values)
+
+gas:  gas                                       Number of observations
+---------                              ---------------------------------------
+                                             Total      Integers   Nonintegers
+|  #                         Negative            -             -             -
+|  #                         Zero              521           521             -
+|  #                         Positive           25            25             -
+|  #                                   -----------   -----------   -----------
+|  #                         Total             546           546             -
+|  #   .                     Missing             -
++----------------------                -----------
+0                     1                        546
+   (2 unique values)
+
+aircond:  aircond                               Number of observations
+-----------------                      ---------------------------------------
+                                             Total      Integers   Nonintegers
+|  #                         Negative            -             -             -
+|  #                         Zero              373           373             -
+|  #                         Positive          173           173             -
+|  #                                   -----------   -----------   -----------
+|  #   #                     Total             546           546             -
+|  #   #                     Missing             -
++----------------------                -----------
+0                     1                        546
+   (2 unique values)
+
+ngarage:  ngarage                               Number of observations
+-----------------                      ---------------------------------------
+                                             Total      Integers   Nonintegers
+|  #                         Negative            -             -             -
+|  #                         Zero              300           300             -
+|  #                         Positive          246           246             -
+|  #                                   -----------   -----------   -----------
+|  #   #   #                 Total             546           546             -
+|  #   #   #   .             Missing             -
++----------------------                -----------
+0                     3                        546
+   (4 unique values)
+
+desireloc:  desireloc                           Number of observations
+---------------------                  ---------------------------------------
+                                             Total      Integers   Nonintegers
+|  #                         Negative            -             -             -
+|  #                         Zero              418           418             -
+|  #                         Positive          128           128             -
+|  #                                   -----------   -----------   -----------
+|  #                         Total             546           546             -
+|  #   #                     Missing             -
++----------------------                -----------
+0                     1                        546
+   (2 unique values)
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. codebook 
+
+---------------------------------------------------------------------------------------------------------------------------------------
+saleprice                                                                                                                     saleprice
+---------------------------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [25000,190000]                Units: 1
+         Unique values: 219                       Missing .: 0/546
+
+                  Mean: 68121.6
+             Std. dev.: 26702.7
+
+           Percentiles:     10%       25%       50%       75%       90%
+                          40500     49000     62000     82000    105000
+
+---------------------------------------------------------------------------------------------------------------------------------------
+lotsize                                                                                                                         lotsize
+---------------------------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (int)
+
+                 Range: [1650,16200]                  Units: 1
+         Unique values: 284                       Missing .: 0/546
+
+                  Mean: 5150.27
+             Std. dev.: 2168.16
+
+           Percentiles:     10%       25%       50%       75%       90%
+                           3000      3600      4600      6360      7980
+
+---------------------------------------------------------------------------------------------------------------------------------------
+nbedroom                                                                                                                       nbedroom
+---------------------------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [1,6]                         Units: 1
+         Unique values: 6                         Missing .: 0/546
+
+            Tabulation: Freq.  Value
+                            2  1
+                          136  2
+                          301  3
+                           95  4
+                           10  5
+                            2  6
+
+---------------------------------------------------------------------------------------------------------------------------------------
+nbath                                                                                                                             nbath
+---------------------------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [1,4]                         Units: 1
+         Unique values: 4                         Missing .: 0/546
+
+            Tabulation: Freq.  Value
+                          402  1
+                          133  2
+                           10  3
+                            1  4
+
+---------------------------------------------------------------------------------------------------------------------------------------
+nstories                                                                                                                       nstories
+---------------------------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [1,4]                         Units: 1
+         Unique values: 4                         Missing .: 0/546
+
+            Tabulation: Freq.  Value
+                          227  1
+                          238  2
+                           40  3
+                           41  4
+
+---------------------------------------------------------------------------------------------------------------------------------------
+driveway                                                                                                                       driveway
+---------------------------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,1]                         Units: 1
+         Unique values: 2                         Missing .: 0/546
+
+            Tabulation: Freq.  Value
+                           77  0
+                          469  1
+
+---------------------------------------------------------------------------------------------------------------------------------------
+recroom                                                                                                                        rec room
+---------------------------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,1]                         Units: 1
+         Unique values: 2                         Missing .: 0/546
+
+            Tabulation: Freq.  Value
+                          449  0
+                           97  1
+
+---------------------------------------------------------------------------------------------------------------------------------------
+basement                                                                                                                       basement
+---------------------------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,1]                         Units: 1
+         Unique values: 2                         Missing .: 0/546
+
+            Tabulation: Freq.  Value
+                          355  0
+                          191  1
+
+---------------------------------------------------------------------------------------------------------------------------------------
+gas                                                                                                                                 gas
+---------------------------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,1]                         Units: 1
+         Unique values: 2                         Missing .: 0/546
+
+            Tabulation: Freq.  Value
+                          521  0
+                           25  1
+
+---------------------------------------------------------------------------------------------------------------------------------------
+aircond                                                                                                                         aircond
+---------------------------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,1]                         Units: 1
+         Unique values: 2                         Missing .: 0/546
+
+            Tabulation: Freq.  Value
+                          373  0
+                          173  1
+
+---------------------------------------------------------------------------------------------------------------------------------------
+ngarage                                                                                                                         ngarage
+---------------------------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,3]                         Units: 1
+         Unique values: 4                         Missing .: 0/546
+
+            Tabulation: Freq.  Value
+                          300  0
+                          126  1
+                          108  2
+                           12  3
+
+---------------------------------------------------------------------------------------------------------------------------------------
+desireloc                                                                                                                     desireloc
+---------------------------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,1]                         Units: 1
+         Unique values: 2                         Missing .: 0/546
+
+            Tabulation: Freq.  Value
+                          418  0
+                          128  1
+
+. *we use codebook to see if there are any missing values* 
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. reg salesprice 
+variable salesprice not found
+r(111);
+
+end of do-file
+
+r(111);
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. reg saleprice
+
+      Source |       SS           df       MS      Number of obs   =       546
+-------------+----------------------------------   F(0, 545)       =      0.00
+       Model |           0         0           .   Prob > F        =         .
+    Residual |  3.8860e+11       545   713032635   R-squared       =    0.0000
+-------------+----------------------------------   Adj R-squared   =    0.0000
+       Total |  3.8860e+11       545   713032635   Root MSE        =     26703
+
+------------------------------------------------------------------------------
+   saleprice | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       _cons |    68121.6   1142.769    59.61   0.000     65876.83    70366.37
+------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. reg saleproce lotsize
+variable saleproce not found
+r(111);
+
+end of do-file
+
+r(111);
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. reg saleprice lotsize
+
+      Source |       SS           df       MS      Number of obs   =       546
+-------------+----------------------------------   F(1, 544)       =    219.06
+       Model |  1.1156e+11         1  1.1156e+11   Prob > F        =    0.0000
+    Residual |  2.7704e+11       544   509271807   R-squared       =    0.2871
+-------------+----------------------------------   Adj R-squared   =    0.2858
+       Total |  3.8860e+11       545   713032635   Root MSE        =     22567
+
+------------------------------------------------------------------------------
+   saleprice | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     lotsize |   6.598768   .4458466    14.80   0.000     5.722976    7.474559
+       _cons |   34136.19   2491.064    13.70   0.000     29242.91    39029.47
+------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. *with this result we can afirm that one unit change in logsize (indipendent variable) rapresent a variation of  6.598768 in saleprice
+>  (dipendent variable)* 
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. *estimate saleprice on lotsize basement and nbedroom* 
+. reg saleprice lotsize basement nbedroom 
+
+      Source |       SS           df       MS      Number of obs   =       546
+-------------+----------------------------------   F(3, 542)       =    114.81
+       Model |  1.5099e+11         3  5.0331e+10   Prob > F        =    0.0000
+    Residual |  2.3761e+11       542   438392536   R-squared       =    0.3886
+-------------+----------------------------------   Adj R-squared   =    0.3852
+       Total |  3.8860e+11       545   713032635   Root MSE        =     20938
+
+------------------------------------------------------------------------------
+   saleprice | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     lotsize |   5.996934   .4187439    14.32   0.000     5.174374    6.819494
+    basement |   7604.839   1888.856     4.03   0.000     3894.464    11315.21
+    nbedroom |   10113.88   1235.705     8.18   0.000     7686.518    12541.23
+       _cons |   4585.815   4054.565     1.13   0.259    -3378.772     12550.4
+------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. test lotsize
+
+ ( 1)  lotsize = 0
+
+       F(  1,   542) =  205.10
+            Prob > F =    0.0000
+
+. test basement
+
+ ( 1)  basement = 0
+
+       F(  1,   542) =   16.21
+            Prob > F =    0.0001
+
+. test nbedroom
+
+ ( 1)  nbedroom = 0
+
+       F(  1,   542) =   66.99
+            Prob > F =    0.0000
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. reg saleprice lotsize basement nbedroom, beta
+
+      Source |       SS           df       MS      Number of obs   =       546
+-------------+----------------------------------   F(3, 542)       =    114.81
+       Model |  1.5099e+11         3  5.0331e+10   Prob > F        =    0.0000
+    Residual |  2.3761e+11       542   438392536   R-squared       =    0.3886
+-------------+----------------------------------   Adj R-squared   =    0.3852
+       Total |  3.8860e+11       545   713032635   Root MSE        =     20938
+
+------------------------------------------------------------------------------
+   saleprice | Coefficient  Std. err.      t    P>|t|                     Beta
+-------------+----------------------------------------------------------------
+     lotsize |   5.996934   .4187439    14.32   0.000                  .486929
+    basement |   7604.839   1888.856     4.03   0.000                 .1359476
+    nbedroom |   10113.88   1235.705     8.18   0.000                 .2792923
+       _cons |   4585.815   4054.565     1.13   0.259                        .
+------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. estat ic
+
+Akaike's information criterion and Bayesian information criterion
+
+-----------------------------------------------------------------------------
+       Model |          N   ll(null)  ll(model)      df        AIC        BIC
+-------------+---------------------------------------------------------------
+           . |        546  -6339.355  -6205.058       4   12418.12   12435.33
+-----------------------------------------------------------------------------
+Note: BIC uses N = number of observations. See [R] BIC note.
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. regcheck 
++--------------------------------------------------------------------------------------------------------------+
+     Regression assumptions:                    |  Test:                                      We seek values
+|--------------------------------------------------------------------------------------------------------------|
+  1) heterokedasticity problem                  |  Breusch-Pagan hettest                         > 0.05
+                                                |  Chi2(1): 118.193     
+                                                |  p-value: 0.000       
+|--------------------------------------------------------------------------------------------------------------|
+  2) no multicollinearity problem               |  Variance inflation factor                     < 5.00
+                                                |  nbedroom : 1.03        
+                                                |  lotsize : 1.02        
+                                                |  basement : 1.01        
+|--------------------------------------------------------------------------------------------------------------|
+  3) residuals are not normally distributed     |  Shapiro-Wilk W normality test                 > 0.01
+                                                |  z: 6.764       
+                                                |  p-value: 0.000       
+|--------------------------------------------------------------------------------------------------------------|
+  4) no specification problem                   |  Linktest                                      > 0.05
+                                                |  t: -2.756      
+                                                |  p-value: 0.006       
+|--------------------------------------------------------------------------------------------------------------|
+  5) functional form problem                    |  Test for appropriate functional form          > 0.05
+                                                |  F(3,539):4.842       
+                                                |  p-value: 0.002       
+|--------------------------------------------------------------------------------------------------------------|
+  6) no influential observations                |  Cook's distance                               < 1.00
+                                                |  no distance is above the cutoff
++--------------------------------------------------------------------------------------------------------------+
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. hettest 
+
+Breusch–Pagan/Cook–Weisberg test for heteroskedasticity 
+Assumption: Normal error terms
+Variable: Fitted values of saleprice
+
+H0: Constant variance
+
+    chi2(1) = 118.19
+Prob > chi2 = 0.0000
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. bpagan saleprice lotsize basement nbedroom 
+ 
+Breusch-Pagan LM statistic:  360.4917  Chi-sq( 4)  P-value =  9.5e-77
+ 
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. estat hettest, rhs 
+
+Breusch–Pagan/Cook–Weisberg test for heteroskedasticity 
+Assumption: Normal error terms
+Variables: All independent variables
+
+H0: Constant variance
+
+    chi2(3) = 133.74
+Prob > chi2 = 0.0000
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. whitetst 
+
+White's general test statistic :  70.65692  Chi-sq( 8)  P-value =  3.6e-12
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. estat szroeter, rhs 
+
+Szroeter's test for homoskedasticity
+
+H0: Variance constant
+Ha: Variance monotonic in variables
+
+--------------------------------------
+    Variable |      chi2   df        p
+-------------+------------------------
+     lotsize |     91.18    1   0.0000*
+    basement |      0.14    1   0.7055*
+    nbedroom |     63.96    1   0.0000*
+--------------------------------------
+* Unadjusted p-values
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. estat imtest 
+
+Cameron & Trivedi's decomposition of IM-test
+
+--------------------------------------------------
+              Source |       chi2     df         p
+---------------------+----------------------------
+  Heteroskedasticity |      70.66      8    0.0000
+            Skewness |      24.48      3    0.0000
+            Kurtosis |   -5824.89      1    1.0000
+---------------------+----------------------------
+               Total |   -5729.75     12    1.0000
+--------------------------------------------------
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. collin lotsize basement nbedroom 
+(obs=546)
+
+  Collinearity Diagnostics
+
+                        SQRT                   R-
+  Variable      VIF     VIF    Tolerance    Squared
+----------------------------------------------------
+   lotsize      1.02    1.01    0.9759      0.0241
+  basement      1.01    1.01    0.9895      0.0105
+  nbedroom      1.03    1.02    0.9688      0.0312
+----------------------------------------------------
+  Mean VIF      1.02
+
+                           Cond
+        Eigenval          Index
+---------------------------------
+    1     3.3074          1.0000
+    2     0.5608          2.4286
+    3     0.1031          5.6639
+    4     0.0287         10.7307
+---------------------------------
+ Condition Number        10.7307 
+ Eigenvalues & Cond Index computed from scaled raw sscp (w/ intercept)
+ Det(correlation matrix)    0.9666
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. predict pricehat 
+(option xb assumed; fitted values)
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. predict res1, res 
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. kdensity res1, normal 
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. sktest res1 
+
+Skewness and kurtosis tests for normality
+                                                         ----- Joint test -----
+    Variable |       Obs   Pr(skewness)   Pr(kurtosis)   Adj chi2(2)  Prob>chi2
+-------------+-----------------------------------------------------------------
+        res1 |       546         0.0000         0.0000         67.47     0.0000
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. swilk res1 
+
+                   Shapiro–Wilk W test for normal data
+
+    Variable |        Obs       W           V         z       Prob>z
+-------------+------------------------------------------------------
+        res1 |        546    0.95473     16.488     6.764    0.00000
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. sfrancia res1 
+
+                  Shapiro–Francia W' test for normal data
+
+    Variable |       Obs       W'          V'        z       Prob>z
+-------------+-----------------------------------------------------
+        res1 |       546    0.95337     18.194     6.400    0.00001
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. chens res1 
+
+               Chen-Shapiro QH* test for normal data
+
+    Variable |    Obs       QH         QH*     P-value
+-------------+----------------------------------------
+        res1 |    546    0.98019    0.46294    < 0.0001
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. omninorm res1 
+
+----------------------------------------------------------
+(n = 546) |        D-H     P-value        asy.     P-value
+----------+-----------------------------------------------
+Residuals |    59.7343      0.0000    165.5652      0.0000
+----------------------------------------------------------
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. ovtest 
+
+Ramsey RESET test for omitted variables
+Omitted: Powers of fitted values of saleprice
+
+H0: Model has no omitted variables
+
+F(3, 539) =   4.84
+ Prob > F = 0.0025
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. generate lotsize2=lotsize^2
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. generate lotsize3=lotsize^3
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. reg saleprice lotsize lotsize2 basement nbedroom, beta 
+
+      Source |       SS           df       MS      Number of obs   =       546
+-------------+----------------------------------   F(4, 541)       =     97.86
+       Model |  1.6314e+11         4  4.0784e+10   Prob > F        =    0.0000
+    Residual |  2.2547e+11       541   416760227   R-squared       =    0.4198
+-------------+----------------------------------   Adj R-squared   =    0.4155
+       Total |  3.8860e+11       545   713032635   Root MSE        =     20415
+
+------------------------------------------------------------------------------
+   saleprice | Coefficient  Std. err.      t    P>|t|                     Beta
+-------------+----------------------------------------------------------------
+     lotsize |   13.66873   1.478838     9.24   0.000                  1.10985
+    lotsize2 |  -.0005821   .0001078    -5.40   0.000                -.6465832
+    basement |   7296.743   1842.548     3.96   0.000                 .1304399
+    nbedroom |   9934.007   1205.292     8.24   0.000                 .2743253
+       _cons |  -16113.05   5507.699    -2.93   0.004                        .
+------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. linktest 
+
+      Source |       SS           df       MS      Number of obs   =       546
+-------------+----------------------------------   F(2, 543)       =    197.59
+       Model |  1.6369e+11         2  8.1844e+10   Prob > F        =    0.0000
+    Residual |  2.2491e+11       543   414206031   R-squared       =    0.4212
+-------------+----------------------------------   Adj R-squared   =    0.4191
+       Total |  3.8860e+11       545   713032635   Root MSE        =     20352
+
+------------------------------------------------------------------------------
+   saleprice | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        _hat |   .5673734   .3776589     1.50   0.134     -.174478    1.309225
+      _hatsq |   3.12e-06   2.70e-06     1.16   0.248    -2.19e-06    8.43e-06
+       _cons |   14040.81   12652.94     1.11   0.268     -10813.9    38895.53
+------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. pwcorr saleprice lotsize basement nbedroom, sig star(.05) sid  
+
+             | salepr~e  lotsize basement nbedroom
+-------------+------------------------------------
+   saleprice |   1.0000 
+             |
+             |
+     lotsize |   0.5358*  1.0000 
+             |   0.0000
+             |
+    basement |   0.1862*  0.0475   1.0000 
+             |   0.0001   0.8462
+             |
+    nbedroom |   0.3664*  0.1519*  0.0972   1.0000 
+             |   0.0000   0.0022   0.1310
+             |
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. reg saleprice lotsize basement nbedroom, robust 
+
+Linear regression                               Number of obs     =        546
+                                                F(3, 542)         =      88.96
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.3886
+                                                Root MSE          =      20938
+
+------------------------------------------------------------------------------
+             |               Robust
+   saleprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     lotsize |   5.996934   .5246009    11.43   0.000     4.966434    7.027434
+    basement |   7604.839   1895.004     4.01   0.000     3882.388    11327.29
+    nbedroom |   10113.88   1260.769     8.02   0.000     7637.284    12590.47
+       _cons |   4585.815   3823.308     1.20   0.231    -2924.502    12096.13
+------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "/var/folders/_y/ks317dnx04q2g2wvy77ss3xc0000gn/T//SD72174.000000"
+
+. rreg saleprice lotsize basement nbedroom 
+
+   Huber iteration 1:  maximum difference in weights = .78268311
+   Huber iteration 2:  maximum difference in weights = .11632717
+   Huber iteration 3:  maximum difference in weights = .06160391
+   Huber iteration 4:  maximum difference in weights = .02113869
+Biweight iteration 5:  maximum difference in weights = .29377196
+Biweight iteration 6:  maximum difference in weights = .07464121
+Biweight iteration 7:  maximum difference in weights = .01642793
+Biweight iteration 8:  maximum difference in weights = .00689248
+
+Robust regression                               Number of obs     =        546
+                                                F(  3,       542) =     115.20
+                                                Prob > F          =     0.0000
+
+------------------------------------------------------------------------------
+   saleprice | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     lotsize |   5.401004   .3667797    14.73   0.000      4.68052    6.121487
+    basement |   7108.909   1654.457     4.30   0.000     3858.975    10358.84
+    nbedroom |   8100.891   1082.359     7.48   0.000     5974.758    10227.02
+       _cons |   10981.33   3551.412     3.09   0.002     4005.111    17957.55
+------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. log close
+      name:  <unnamed>
+       log:  /Users/nagibsouki/Desktop/nagib souki 1793926.log
+  log type:  text
+ closed on:  11 Nov 2021, 12:59:16
+---------------------------------------------------------------------------------------------------------------------------------------
