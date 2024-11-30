@@ -25,21 +25,45 @@ def calcular_resultados_mensuales(productos):
             })
     return pd.DataFrame(resultados)
 
-# Función para mostrar gráfico de costos y ventas
-def mostrar_grafico_configuracion(productos):
-    fig, ax = plt.subplots(figsize=(10, 5))
+# Función para mostrar gráfico de barras
+def mostrar_grafico_configuracion_barras(productos, escenario):
+    fig, ax = plt.subplots(figsize=(12, 6))
+
     nombres = []
-    ventas_estimadas = []
-    costos_variables_totales = []
+    ingresos = []
+    costos_variables = []
+    gastos_fijos = []
+    ganancias_netas = []
+
+    # Calcular datos para cada producto en función del escenario seleccionado
     for producto, datos in productos.items():
         nombres.append(producto)
-        ventas_estimadas.append(datos["escenarios"]["base"] * datos["precio_venta"])
-        costos_variables_totales.append(datos["escenarios"]["base"] * datos["costo_variable"])
+        ingreso = datos["escenarios"][escenario] * datos["precio_venta"]
+        costo_variable = datos["escenarios"][escenario] * datos["costo_variable"]
+        gasto_fijo = datos["gastos_fijos"]
+        ganancia_neta = ingreso - costo_variable - gasto_fijo
 
-    ax.bar(nombres, ventas_estimadas, color="#A3D6A8", label="Ventas Estimadas (Base)")
-    ax.bar(nombres, costos_variables_totales, color="#FF9999", label="Costos Variables (Base)")
-    ax.set_title("Configuración de Ventas y Costos", fontsize=16, fontweight="bold")
+        ingresos.append(ingreso)
+        costos_variables.append(costo_variable)
+        gastos_fijos.append(gasto_fijo)
+        ganancias_netas.append(ganancia_neta)
+
+    # Crear barras
+    ax.bar(nombres, ingresos, label="Ingresos ($)", color="#4CAF50")
+    ax.bar(nombres, costos_variables, label="Costos Variables ($)", color="#FF5733")
+    ax.bar(nombres, gastos_fijos, bottom=costos_variables, label="Gastos Fijos ($)", color="#3498DB")
+
+    # Mostrar ganancias netas como texto en el gráfico
+    for i, ganancia in enumerate(ganancias_netas):
+        ax.text(i, ingresos[i] + 200, f"Ganancia: ${ganancia:,.2f}", ha="center", fontsize=10, color="black", bbox=dict(facecolor='white', alpha=0.7))
+
+    # Configuración del gráfico
+    ax.set_title(f"Ventas, Costos y Ganancias Netas por Producto ({escenario.capitalize()})", fontsize=16, fontweight="bold")
+    ax.set_ylabel("Monto ($)")
+    ax.set_xlabel("Productos")
     ax.legend()
+    ax.grid(axis="y", linestyle="--", alpha=0.7)
+
     st.pyplot(fig)
 
 # Función para guardar configuración
@@ -97,31 +121,31 @@ productos = {
 st.title("Configurador de Productos 📊")
 st.sidebar.header("Opciones del Configurador")
 
-# Botones para guardar, cargar y resetear configuraciones
-if st.sidebar.button("Guardar Configuración"):
+# Botones con claves únicas
+if st.sidebar.button("Guardar Configuración", key="guardar_config"):
     guardar_configuracion(productos)
 
-if st.sidebar.button("Cargar Configuración"):
+if st.sidebar.button("Cargar Configuración", key="cargar_config"):
     productos_cargados = cargar_configuracion()
     if productos_cargados:
         productos = productos_cargados
 
-if st.sidebar.button("Resetear Configuración"):
+if st.sidebar.button("Resetear Configuración", key="reset_config"):
     st.experimental_rerun()
 
 # Configuración por producto (usando expansores)
 for producto, datos in productos.items():
     with st.sidebar.expander(f"⚙️ Configuración: {producto}"):
-        datos["precio_venta"] = st.number_input(f"Precio venta ({producto})", value=datos["precio_venta"])
-        datos["costo_variable"] = st.number_input(f"Costo variable ({producto})", value=datos["costo_variable"])
-        datos["gastos_fijos"] = st.number_input(f"Gastos fijos ({producto})", value=datos["gastos_fijos"])
-        datos["escenarios"]["pesimista"] = st.slider(f"Escenario Pesimista ({producto})", 0, 50000, datos["escenarios"]["pesimista"], step=500)
-        datos["escenarios"]["base"] = st.slider(f"Escenario Base ({producto})", 0, 50000, datos["escenarios"]["base"], step=500)
-        datos["escenarios"]["optimista"] = st.slider(f"Escenario Optimista ({producto})", 0, 50000, datos["escenarios"]["optimista"], step=500)
+        datos["precio_venta"] = st.number_input(f"Precio venta ({producto})", value=datos["precio_venta"], key=f"precio_{producto}")
+        datos["costo_variable"] = st.number_input(f"Costo variable ({producto})", value=datos["costo_variable"], key=f"costo_{producto}")
+        datos["gastos_fijos"] = st.number_input(f"Gastos fijos ({producto})", value=datos["gastos_fijos"], key=f"gasto_{producto}")
+        datos["escenarios"]["pesimista"] = st.slider(f"Escenario Pesimista ({producto})", 0, 50000, datos["escenarios"]["pesimista"], step=500, key=f"pesimista_{producto}")
+        datos["escenarios"]["base"] = st.slider(f"Escenario Base ({producto})", 0, 50000, datos["escenarios"]["base"], step=500, key=f"base_{producto}")
+        datos["escenarios"]["optimista"] = st.slider(f"Escenario Optimista ({producto})", 0, 50000, datos["escenarios"]["optimista"], step=500, key=f"optimista_{producto}")
 
 # Mostrar un resumen de configuración filtrado por escenario
 st.header("Resumen de Configuración")
-escenario_config_filtrado = st.selectbox("Filtrar resumen de configuración por escenario:", ["Pesimista", "Base", "Optimista"])
+escenario_config_filtrado = st.selectbox("Filtrar resumen de configuración por escenario:", ["Pesimista", "Base", "Optimista"], key="escenario_resumen")
 config_resumen = []
 for producto, datos in productos.items():
     ventas_filtradas = datos["escenarios"][escenario_config_filtrado.lower()]
@@ -137,26 +161,18 @@ st.dataframe(resumen_df)
 
 # Mostrar el gráfico de configuración
 st.header("Visualización de Ventas y Costos")
-mostrar_grafico_configuracion(productos)
+escenario_grafico = st.selectbox("Selecciona un escenario para visualizar:", ["pesimista", "base", "optimista"], key="escenario_grafico")
+mostrar_grafico_configuracion_barras(productos, escenario_grafico)
 
 # Calcular resultados y mostrar las tablas
 st.header("Resultados Financieros")
 
 # Selección de escenario para filtrado de resultados
-escenario_filtrado = st.selectbox("Filtrar resultados detallados por escenario:", ["Todos", "Pesimista", "Base", "Optimista"])
+escenario_filtrado = st.selectbox("Filtrar resultados detallados por escenario:", ["Pesimista", "Base", "Optimista"], key="escenario_resultados")
 resultados_df = calcular_resultados_mensuales(productos)
 
-# Filtrar resultados si se selecciona un escenario específico
-if escenario_filtrado != "Todos":
-    resultados_df = resultados_df[resultados_df["Escenario"] == escenario_filtrado]
+# Filtrar resultados según el escenario seleccionado
+resultados_df = resultados_df[resultados_df["Escenario"] == escenario_filtrado]
 
 st.subheader("Resultados Detallados")
 st.dataframe(resultados_df)
-
-# Resumen consolidado por escenario
-st.subheader("Resumen Consolidado")
-totales = resultados_df.groupby("Escenario").sum(numeric_only=True)
-totales["Rentabilidad (%)"] = (totales["Utilidad Operativa Mensual ($)"] / totales["Ingresos Mensuales ($)"]) * 100
-totales = totales.drop(columns=["Utilidad Operativa Mensual ($)", "Margen de Contribución ($)", "Costos Variables Mensuales ($)"])
-totales_formateados = totales.style.format({"Ingresos Mensuales ($)": "${:,.2f}", "Rentabilidad (%)": "{:.2f}%"})
-st.dataframe(totales_formateados)
