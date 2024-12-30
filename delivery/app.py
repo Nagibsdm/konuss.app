@@ -77,7 +77,7 @@ st.markdown("""
         .stApp {
             background: linear-gradient(to bottom, #f9f9f9, #ffffff);
             font-family: 'Poppins', sans-serif;
-             color: #000000;
+            color: #000000;
         }
         .header {
             text-align: center;
@@ -102,9 +102,22 @@ st.markdown("""
             border-radius: 12px;
             margin-bottom: 15px;
         }
+        .add-button {
+            background-color: #e63946 !important; /* Fondo rojo */
+            color: white !important; /* Texto blanco */
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+            transition: all 0.3s ease-in-out;
+        }
+        .add-button:hover {
+            background-color: #c22834 !important; /* Fondo más oscuro al pasar el mouse */
+        }
     </style>
 """, unsafe_allow_html=True)
-
 # Encabezado
 st.markdown("<h1 class='header'>🍕 Konuss - ¡Ahora la pizza se come en cono! 🎉</h1>", unsafe_allow_html=True)
 st.markdown("<h2 class='subheader'>✨ ¡Haz tu pedido y disfruta de una experiencia única! ✨</h2>", unsafe_allow_html=True)
