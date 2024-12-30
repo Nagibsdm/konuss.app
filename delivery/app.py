@@ -77,6 +77,7 @@ st.markdown("""
         .stApp {
             background: linear-gradient(to bottom, #f9f9f9, #ffffff);
             font-family: 'Poppins', sans-serif;
+             color: #000000;
         }
         .header {
             text-align: center;
