@@ -71,7 +71,7 @@ def send_order_email(order_id, cart, customer_name, customer_phone, customer_add
     except Exception as e:
         st.error(f"❌ Error al enviar el correo: {e}")
 
-# Estilo CSS
+# Estilo CSS actualizado
 st.markdown("""
     <style>
         .stApp {
@@ -118,6 +118,7 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
+
 # Encabezado
 st.markdown("<h1 class='header'>🍕 Konuss - ¡Ahora la pizza se come en cono! 🎉</h1>", unsafe_allow_html=True)
 st.markdown("<h2 class='subheader'>✨ ¡Haz tu pedido y disfruta de una experiencia única! ✨</h2>", unsafe_allow_html=True)
@@ -175,6 +176,6 @@ if st.button("Confirmar Pedido ✅"):
             customer_phone,
             customer_address
         )
-        st.success(f"¡Pedido enviado! Orden ID: {st.session_state['order_id']} 🚀. Por favor, compartir comprobante de pago con el numero de orden al Whatsapp +58 0424-8943749 o al e-mail konussfactory@gmail.com. ⚠️El pedido sera enviado una vez el pago haya sido confirmado.⚠️")
+        st.success(f"¡Pedido enviado! Orden ID: {st.session_state['order_id']} 🚀. Por favor, compartir comprobante de pago con el número de orden al Whatsapp +58 0424-8943749 o al e-mail konussfactory@gmail.com. ⚠️El pedido será enviado una vez el pago haya sido confirmado.⚠️")
     else:
         st.error("⚠️ Por favor, completa todos los campos.")
