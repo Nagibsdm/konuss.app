@@ -103,18 +103,31 @@ st.markdown("""
             margin-bottom: 15px;
         }
         .add-button {
-            background-color: #e63946 !important; /* Fondo rojo */
-            color: white !important; /* Texto blanco */
+            background-color: #e63946 !important;
+            color: white !important;
             border-radius: 8px;
             padding: 10px;
             font-size: 16px;
             cursor: pointer;
             border: none;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease-in-out;
         }
         .add-button:hover {
-            background-color: #c22834 !important; /* Fondo más oscuro al pasar el mouse */
+            background-color: #c22834 !important;
+        }
+        input, textarea {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+            border: 1px solid #e63946 !important;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        input:focus, textarea:focus {
+            outline: none !important;
+            border: 1px solid #c22834 !important;
+            box-shadow: 0px 0px 5px rgba(226, 57, 70, 0.5);
         }
     </style>
 """, unsafe_allow_html=True)
