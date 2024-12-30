@@ -3,12 +3,12 @@ import random
 import smtplib
 from email.mime.text import MIMEText
 
-# Configuración del correo (reemplaza con tus credenciales)
-EMAIL = "asdfksnd57@gmail.com"  # Reemplaza con tu correo
-PASSWORD = "ckrj hrve aasd kncd"  # Reemplaza con tu contraseña de correo
-TO_EMAIL = "konussfactory@gmail.com"  # Dirección donde se enviará el pedido
+# Configuración del correo
+EMAIL = "asdfksnd57@gmail.com"
+PASSWORD = "ckrj hrve aasd kncd"
+TO_EMAIL = "konussfactory@gmail.com"
 
-# Configuración del estado de la aplicación
+# Configuración inicial del estado
 if "quantities" not in st.session_state:
     st.session_state["quantities"] = {product["name"]: 0 for product in [
         {"name": "Margarita", "price": 3.90},
@@ -19,22 +19,24 @@ if "quantities" not in st.session_state:
     ]}
 if "order_id" not in st.session_state:
     st.session_state["order_id"] = None
+if "total" not in st.session_state:
+    st.session_state["total"] = 0.0
 
 # Catálogo de productos
 products = [
-    {"name": "Margarita", "price": 3.90, "description": "Salsa y mozzarella. 🧀 Un clásico que nunca falla, ideal para cualquier momento."},
-    {"name": "Margarita con Jamón", "price": 3.90, "description": "Salsa, mozzarella y jamón. 🍖 Una versión que te abraza con su sabor casero."},
-    {"name": "Campagnola", "price": 3.90, "description": "Salsa, mozzarella, jamón y maíz. 🌽 El sabor del campo directo a tu cono."},
-    {"name": "Vegetariana", "price": 3.90, "description": "Salsa, mozzarella, cebolla, champiñón y pimentón. 🥗 Fresca y deliciosa, hecha con amor a la naturaleza."},
-    {"name": "Pepperoni", "price": 3.90, "description": "Salsa, mozzarella y pepperoni. 🌶️ Para quienes disfrutan el lado picante de la vida."}
+    {"name": "Margarita", "price": 3.90, "description": "🍅 Salsa y mozzarella. Un clásico irresistible."},
+    {"name": "Margarita con Jamón", "price": 3.90, "description": "🍖 Salsa, mozzarella y jamón. Delicioso."},
+    {"name": "Campagnola", "price": 3.90, "description": "🌽 Salsa, mozzarella, jamón y maíz. Sabores únicos."},
+    {"name": "Vegetariana", "price": 3.90, "description": "🥬 Salsa, mozzarella, cebolla y champiñones. Fresca."},
+    {"name": "Pepperoni", "price": 3.90, "description": "🍕 Salsa, mozzarella y pepperoni. La que nunca falla."}
 ]
 
-# Funciones auxiliares
+# Función para generar un ID único de pedido
 def generate_order_id():
     return f"KON-{random.randint(1000, 9999)}"
 
+# Función para enviar el pedido por correo
 def send_order_email(order_id, cart, customer_name, customer_phone, customer_address):
-    # Crear el contenido del correo
     subject = f"Nuevo Pedido - {order_id}"
     body = f"""
     Nuevo Pedido Realizado:
@@ -55,146 +57,101 @@ def send_order_email(order_id, cart, customer_name, customer_phone, customer_add
             body += f"- {product_name}: {quantity} x ${product['price']:.2f} = ${subtotal:.2f}\n"
     body += f"\nTotal: ${total:.2f}"
 
-    # Configurar el mensaje de correo
     msg = MIMEText(body)
     msg["Subject"] = subject
     msg["From"] = EMAIL
     msg["To"] = TO_EMAIL
 
-    # Enviar el correo
     try:
         with smtplib.SMTP("smtp.gmail.com", 587) as server:
             server.starttls()
             server.login(EMAIL, PASSWORD)
             server.sendmail(EMAIL, TO_EMAIL, msg.as_string())
-        st.success("Pedido enviado por correo exitosamente.")
+        st.success("¡Pedido enviado por correo exitosamente! 🚀")
     except Exception as e:
-        st.error(f"Error al enviar el correo: {e}")
+        st.error(f"❌ Error al enviar el correo: {e}")
 
-# Diseño de la aplicación
-st.title("🍕 Konuss - Delivery App")
-st.markdown(
-    """
+# Estilo CSS
+st.markdown("""
     <style>
-    .stApp {
-        background-color: #f9f9f9;
-    }
-    h1, h2, h3, h4, h5, h6, p, label {
-        color: #000000 !important;
-        font-family: 'Arial', sans-serif;
-    }
-    .stButton>button {
-        background-color: #e63946;
-        color: white;
-        border-radius: 8px;
-        font-size: 16px;
-        padding: 10px 20px;
-        font-family: 'Tahoma', sans-serif;
-        transition: 0.3s;
-    }
-    .stButton>button:hover {
-        background-color: #d90429;
-        transform: scale(1.1);
-    }
-    .remove-btn {
-        background-color: #ffffff !important;
-        color: #000000 !important;
-        border: 1px solid #d1d1d1;
-        border-radius: 5px;
-        font-size: 14px;
-        padding: 5px 10px;
-        margin-left: 10px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-    .remove-btn:hover {
-        background-color: #f5f5f5 !important;
-        color: #000000 !important;
-        border-color: #aaaaaa;
-    }
-    input, textarea {
-        background-color: #ffffff;
-        color: #000000;
-        font-size: 16px;
-        border: 1px solid #d1d1d1;
-        border-radius: 5px;
-        padding: 10px;
-        width: 100%;
-    }
-    input:focus, textarea:focus {
-        outline: none;
-        border: 1px solid #2a9d8f;
-        box-shadow: 0px 0px 5px rgba(42, 157, 143, 0.5);
-    }
+        .stApp {
+            background: linear-gradient(to bottom, #f9f9f9, #ffffff);
+            font-family: 'Poppins', sans-serif;
+        }
+        .header {
+            text-align: center;
+            color: #e63946;
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .subheader {
+            text-align: center;
+            color: #495057;
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        .section-title {
+            background: #e63946;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
     </style>
-    """,
-    unsafe_allow_html=True
-)
-st.subheader("✨ ¡Haz tu pedido y disfruta de una experiencia única! ✨")
+""", unsafe_allow_html=True)
 
-# Mostrar productos
-st.write("### Menú 🍽️")
+# Encabezado
+st.markdown("<h1 class='header'>🍕 Konuss - ¡Ahora la pizza se come en cono! 🎉</h1>", unsafe_allow_html=True)
+st.markdown("<h2 class='subheader'>✨ ¡Haz tu pedido y disfruta de una experiencia única! ✨</h2>", unsafe_allow_html=True)
+
+# Sección Menú
+st.markdown("<div class='section-title'>📋 Menú</div>", unsafe_allow_html=True)
 for product in products:
-    col1, col2 = st.columns([3, 1])
-    with col1:
-        st.write(f"#### **{product['name']}** - ${product['price']:.2f}")
-        st.write(f"{product['description']}")
-    with col2:
-        if st.button(f"Añadir {product['name']} al carrito", key=f"add_{product['name']}"):
-            st.session_state["quantities"][product["name"]] += 1
-            st.success(f"✔️ {product['name']} añadido al carrito.")
+    st.write(f"**{product['name']}** - ${product['price']:.2f}")
+    st.write(f"{product['description']}")
+    if st.button(f"Añadir {product['name']} al carrito", key=f"add_{product['name']}"):
+        st.session_state["quantities"][product["name"]] += 1
+        st.success(f"🎉 ¡{product['name']} añadido al carrito!")
 
-# Mostrar carrito
-st.write("### Tu carrito 🛒")
+# Sección Carrito
+st.markdown("<div class='section-title'>🛒 Tu carrito</div>", unsafe_allow_html=True)
 if any(quantity > 0 for quantity in st.session_state["quantities"].values()):
-    st.write("#### Detalles del pedido:")
-    total = 0
+    st.session_state["total"] = 0
     for product_name, quantity in st.session_state["quantities"].items():
         if quantity > 0:
             product = next((p for p in products if p["name"] == product_name), None)
             if product:
-                subtotal = product["price"] * quantity
-                total += subtotal
-                col1, col2 = st.columns([4, 1])
+                col1, col2, col3 = st.columns([2, 2, 1])
                 with col1:
-                    st.write(f"{product_name}: {quantity} x ${product['price']:.2f} = ${subtotal:.2f}")
+                    st.write(f"**{product_name}** - ${product['price']:.2f} c/u")
                 with col2:
-                    remove_button = st.button(
-                        f"❌", key=f"remove_{product_name}", help=f"Eliminar {product_name}"
+                    new_quantity = st.number_input(
+                        f"Cantidad ({product_name})",
+                        min_value=0,
+                        max_value=100,
+                        value=quantity,
+                        step=1,
+                        key=f"quantity_{product_name}"
                     )
-                    if remove_button:
-                        st.session_state["quantities"][product_name] = 0
-    st.write(f"**Total a pagar:** ${total:.2f}")
+                    st.session_state["quantities"][product_name] = new_quantity
+                with col3:
+                    subtotal = product['price'] * new_quantity
+                    st.session_state["total"] += subtotal
+                    st.write(f"${subtotal:.2f}")
+    st.write(f"### Total: ${st.session_state['total']:.2f} 💵")
 else:
-    st.write("🛒 Tu carrito está vacío.")
+    st.write("¡Tu carrito está vacío! 😢")
 
-# Métodos de pago
-st.write("### Métodos de Pago 💳")
-st.markdown(
-    """
-    <div style="color: #000000;">
-    1. <b>PagoMovil:</b> <br>
-       - C.I: 8342252 <br>
-       - Teléfono: 0424-8943749 <br>
-       - Banco: Banesco <br><br>
-    2. <b>Zelle:</b> <br>
-       - Dimellamaite@hotmail.com <br><br>
-    3. <b>Efectivo/Tarjeta:</b> <br>
-       - Contactar al WhatsApp: +58 123-456-7890 para confirmar el método de pago. <br><br>
-    <i>Nota:</i> La orden se procesará una vez que el pago sea confirmado.
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
-# Datos del cliente
-st.write("### Tus datos 📋")
-customer_name = st.text_input("Nombre Completo")
-customer_phone = st.text_input("Teléfono")
-customer_address = st.text_area("Dirección")
-
-# Finalizar pedido
-if st.button("Finalizar Pedido 🛒"):
+# Sección Datos del Cliente
+st.markdown("<div class='section-title'>🚀 Finalizar Pedido</div>", unsafe_allow_html=True)
+customer_name = st.text_input("📝 Nombre Completo")
+customer_phone = st.text_input("📞 Teléfono")
+customer_address = st.text_area("📍 Dirección")
+if st.button("Confirmar Pedido ✅"):
     if customer_name and customer_phone and customer_address:
         st.session_state["order_id"] = generate_order_id()
         send_order_email(
@@ -204,10 +161,6 @@ if st.button("Finalizar Pedido 🛒"):
             customer_phone,
             customer_address
         )
-        st.success(f"🎉 Tu pedido ha sido realizado exitosamente. Tu número de orden es {st.session_state['order_id']}. ¡Gracias por tu compra!")
-        st.session_state["quantities"] = {key: 0 for key in st.session_state["quantities"]}
+        st.success(f"¡Pedido enviado! Orden ID: {st.session_state['order_id']} 🚀. Por favor, compartir comprobante de pago con el numero de orden al Whatsapp +58 0424-8943749 o al e-mail konussfactory@gmail.com. ⚠️El pedido sera enviado una vez el pago haya sido confirmado.⚠️")
     else:
-        st.error("⚠️ Por favor, completa todos los datos para finalizar el pedido.")
-
-st.write("---")
-st.caption("🍕 Konuss - Ahora la pizza se come en cono 🍕")
+        st.error("⚠️ Por favor, completa todos los campos.")
