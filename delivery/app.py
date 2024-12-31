@@ -77,7 +77,7 @@ st.markdown("""
         .stApp {
             background: linear-gradient(to bottom, #f9f9f9, #ffffff);
             font-family: 'Poppins', sans-serif;
-            color: #000000;
+            color: #000000 !important;
         }
         .header {
             text-align: center;
@@ -105,13 +105,13 @@ st.markdown("""
         .add-button {
             background-color: #e63946 !important;
             color: white !important;
-            border-radius: 8px;
-            padding: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease-in-out;
+            border-radius: 8px !important;
+            padding: 10px !important;
+            font-size: 16px !important;
+            cursor: pointer !important;
+            border: none !important;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1) !important;
+            transition: all 0.3s ease-in-out !important;
         }
         .add-button:hover {
             background-color: #c22834 !important;
@@ -120,14 +120,14 @@ st.markdown("""
             background-color: #ffffff !important;
             color: #000000 !important;
             border: 1px solid #e63946 !important;
-            border-radius: 8px;
-            padding: 10px;
-            font-size: 16px;
+            border-radius: 8px !important;
+            padding: 10px !important;
+            font-size: 16px !important;
         }
         input:focus, textarea:focus {
             outline: none !important;
             border: 1px solid #c22834 !important;
-            box-shadow: 0px 0px 5px rgba(226, 57, 70, 0.5);
+            box-shadow: 0px 0px 5px rgba(226, 57, 70, 0.5) !important;
         }
     </style>
 """, unsafe_allow_html=True)
